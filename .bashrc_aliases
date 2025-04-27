@@ -1,0 +1,10 @@
+
+
+alias cp="cp -i"
+alias rm="rm -i"
+alias ls="ls --color=auto"
+alias ll="ls -la"
+
+
+alias om_update="sudo dnf clean all ; dnf clean all ; sudo dnf distro-sync --refresh --allowerasing 2>&1| tee dsync2-log.txt"
+
