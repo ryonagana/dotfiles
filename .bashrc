@@ -15,7 +15,7 @@ export CC=/usr/bin/gcc
 export CXX=/usr/bin/g++
 
 
-export PATH=$PATH:/home/user/.local/bin/
+export PATH=$PATH:$HOME/.local/bin/
 
 test -s  ~/.bash_aliases && source ~/.bashrc_aliases || true
 
