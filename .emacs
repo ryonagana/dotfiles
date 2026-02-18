@@ -17,6 +17,15 @@
     (package-install pkg)))
 
 
+(defvar packages '(company lsp-mode php-mode flycheck ))
+
+
+
+(dolist (package packages)
+  (package-exists package))
+
+
+
 (load-theme 'monokai t)
 
 
@@ -26,7 +35,7 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 (global-display-line-numbers-mode 1)
-
+(delete-selection-mode 1)
 
 (setq initial-scratch-message nil)
 (setq inhibit-startup-screen t)
@@ -36,13 +45,13 @@
 
 
 
-;(setq-default tab-width 3)
-;(setq-default indent-tabs-mode nil)
+(setq-default tab-width 3)
+(setq-default indent-tabs-mode nil)
 
 
-(setq-default tab-width 3
-              indent-tabs-mode nil
-              standard-indent 3)
+;;(setq-default tab-width 3
+;;              indent-tabs-mode nil
+;;              standard-indent 3)
 
 
 (setq-default c-basic-offset 3)
@@ -78,16 +87,6 @@
 
 ;Ativar IDO
  (ido-mode 1)
-
-
-
-
-
-(defvar packages '(company monokai-theme lsp-mode php-mode flycheck))
-
-
-(dolist (package packages)
-  (package-exists package))
 
 
 (custom-set-variables
