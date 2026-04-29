@@ -17,7 +17,7 @@
     (package-install pkg)))
 
 
-(defvar packages '(company lsp-mode lsp-ui  php-mode flycheck ))
+(defvar packages '(company lsp-mode lsp-ui  php-mode flycheck web-mode dap-mode ))
 
 
 
@@ -30,7 +30,7 @@
 
 
 (tool-bar-mode 0)
-(menu-bar-mode 1)
+(menu-bar-mode 0)
 (scroll-bar-mode 0)
 (column-number-mode 1)
 (show-paren-mode 1)
@@ -45,8 +45,27 @@
 
 
 
-(setq-default tab-width 3)
+(setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
+
+(add-hook 'c-mode-hook
+          (lambda()
+            (setq tab-width 4)))
+
+(add-hook 'php-mode-hook
+          (lambda()
+            (setq tab-width 4)))
+
+(add-hook 'web-mode-hook
+          (lambda()
+            (setq tab-width 2)
+            (setq js-indent-level 3)
+            (setq css-indent-offset 2)))
+
+
+
+
+
 
 
 ;;(setq-default tab-width 3
@@ -61,10 +80,15 @@
 
 
 
-(defun indentar-tabs ()
-  "Insere 3 espacos em 1 tab."
-  (interactive)
-  (insert "   "))
+
+
+(defun indentar-tabs (&optional n)
+  "Insere espacos de acordo com tab-width em 1 tab."
+  (interactive "P")
+  (let ((qtd (if n (prefix-numeric-value n)
+               tab-width)))
+   (insert (make-string qtd ?\s))))
+
 
 
 (defun recuar-tabs ()
@@ -80,7 +104,7 @@
 
 
 
-(setq lsp-clients-clangd-executable "/usr/bin/clangd-21")
+;;(setq lsp-clients-clangd-executable "/usr/bin/clangd-21")
 
 ;FONT
 (add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
@@ -139,13 +163,4 @@
 (require 'dap-php)
 
 
-(dap-register-debug-template "Debug Chaves"
-  (list :type "php"
-        :request "launch"
-        :port 9003  ;Must match your php.ini port
-        :cwd "/home/ti04/programacao/php/funvic_chaves/"
-        :hostName "127.0.0.1"  ; Must match your xdebug.client_host
-        :name "PHP DAP Config"
-        :pathMappings (vector (list :localRoot "/home/ti04/programacao/php/funvic_chaves"
-                                    :remoteRoot "/var/www/html"))))
 
